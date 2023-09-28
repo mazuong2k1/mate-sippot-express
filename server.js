@@ -4,11 +4,12 @@ const axios = require('axios');
 const cors = require('cors'); 
 const app = express();
 const IP = require('ip');
+require('dotenv').config();
 const port = 3000; // Choose an appropriate port
 
 // Replace 'YOUR_TELEGRAM_BOT_TOKEN' with your actual Telegram bot token
-const TELEGRAM_BOT_TOKEN = '5788363554:AAF-SVpxKsmsqyNVzLnJffQ1XqJoXCwRmo0';
-const TELEGRAM_CHAT_ID = '-907272935'; // Replace with your actual chat ID
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID; // Replace with your actual chat ID
 
 app.use(bodyParser.json());
 app.use(cors())
@@ -18,7 +19,8 @@ app.use(cors())
 
 app.get('/', (req, res) => {
     const ipAddress = IP.address();
-    res.send(ipAddress)
+    // res.send(TELEGRAM_CHAT_ID)
+    res.send(TELEGRAM_BOT_TOKEN)
   })
 app.post('/api/confirm', async (req, res) => {
     const formData = req.body;
