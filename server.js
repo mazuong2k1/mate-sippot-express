@@ -13,7 +13,7 @@ const port = 3000; // Choose an appropriate port
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID; // Replace with your actual chat ID
 
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 //<<<<<<< HEAD
 //app.use(cors())
 // app.listen(80, function () {
