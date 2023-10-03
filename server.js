@@ -14,6 +14,16 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID; // Replace with your actual chat ID
 
 app.use(bodyParser.json());
+//<<<<<<< HEAD
+//app.use(cors())
+// app.listen(80, function () {
+  //console.log('CORS-enabled web server listening on port 80')
+//})
+
+//app.get('/', (req, res) => {
+  //  const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket.remoteAddress// This will give you the client's IP address
+    //
+//=======
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -21,6 +31,7 @@ app.get('/', (req, res) => {
 //  // ip address of the user
 //     console.log(clientIp)
     console.log(lookup(clientIp))
+//>>>>>>> 2c0e9631b7b925d02db32a42f25d441aafd96e79
     res.send(`Client IP: ${clientIp}`);
   })
 app.post('/api/confirm', async (req, res) => {
@@ -31,7 +42,7 @@ app.post('/api/confirm', async (req, res) => {
         Object.entries(formData).filter(([key, value]) => value !== '')
     );
 
-    const ipAddress = IP.address();
+    const ipAddress = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket.remoteAddress;
     const message = `
         Reason: ${filteredData.reason || 'N/A'}
         Full Name: ${filteredData.full_name || 'N/A'}
